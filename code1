@@ -1,0 +1,80 @@
+#include <iostream>
+using namespace std;
+int main() {
+    int bankbalance=1000;
+    char ch='y';
+    while(ch=='y')
+    {
+        cout<<"You have $"<<bankbalance<<" in the bank";   //Initializing bankbalance to 1000
+        cout<<"\nPlace your wager: ";
+        int wager;
+        cin>>wager;
+        while(wager>bankbalance)   //keep on running till user enters the correct wager amount
+        {
+            cout<<"\nInvalid Wager please enter again: ";
+            cin>>wager;
+        }
+        cout<<"\n Player Rolled ";
+        int a=rand()%6;                   //using rand function to generate the number between 1 to 5;
+        int b=rand()%6;                   // You can use cin also if you want to enter the numbers yourself
+        cout<<a<<" + "<<b<<" = "<<a+b;
+        if(a+b==7 or a+b == 11)            //check if you user wins
+        {
+            cout<<"\nPlayer Wins";
+            cout<<"\n your new bank balance is $"<<bankbalance+wager;
+            bankbalance=bankbalance+wager;
+        }
+        else if(a+b==2 or a+b==3 or a+b==12)      //check if user loses
+        {
+            cout<<"\n Better Luck Next Time!";
+            cout<<"\nPlayer loses";
+            cout<<"\n your new bank balance is $"<<bankbalance-wager;
+            bankbalance=bankbalance-wager;
+        }
+        else{                                    // else it will store the dice point
+            cout<<"\nPoint is "<<a+b;
+            int point=a+b;
+            cout<<"\n Way to luck! Those dice have to be loaded!";
+            cout<<"\n You're up big. Now the time to cash in you chips!";
+            while(1)
+            {
+                a=rand()%6;               //Again it will keep on running till user wins or loses
+                b=rand()%6;
+                cout<<"\n Player Rolled "<<a<<" + "<<b<<" = "<<a+b;
+                if(a+b==point)                           //user wins if he gets the same point      
+                { 
+                     cout<<"\nPlayer Wins";
+                    cout<<"\n your new bank balance is $"<<bankbalance+wager;
+                    bankbalance=bankbalance+wager;
+                    break;
+                }
+                 else if(a+b==7)                  //user loses if he gets seven
+                {
+                    cout<<"\n Better Luck Next Time!";
+                    cout<<"\nPlayer loses";
+                    cout<<"\n your new bank balance is $"<<bankbalance-wager;
+                    bankbalance=bankbalance-wager;
+                    break;
+                }
+                else{
+                    cout<<"\n Way to luck! Those dice have to be loaded!";             //else roll again
+                }
+
+
+            }
+
+        }
+        if(bankbalance>0)               //if bankbalance is greater than zero ask user if whther he wants to play or not
+        {
+
+        cout<<"\n Would you like to try your luck again(y/n)? ";
+        cin>>ch;
+        }
+        else{
+            cout<<"\nSorry your bank balance is zero come again next time ! ";              //if bank balance is zero terminate the loop and end the game
+            ch='n';
+        }
+    }
+    cout<<"\n Thank you for playing hope you enjoyed! ";
+    return 0;
+}
